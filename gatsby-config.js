@@ -36,6 +36,10 @@ module.exports = {
             family: `Open Sans`,
           },
           {
+            family: `Trirong`,
+            variants: [`400`, `500`, `600`, `700`],
+          },
+          {
             family: `Caveat`,
           },
         ],

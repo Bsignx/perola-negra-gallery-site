@@ -6,12 +6,35 @@ import { Link } from "gatsby"
 import NavLink from "./NavLink"
 
 const Navbar = () => {
-  return <h2>navbar component</h2>
+  return (
+    <Wrapper>
+      <div className="nav-center">
+        <div className="nav-header">
+          <Link to="/">
+            <img src={logo} alt="Logo Pérola Negra Marcenaria"/>
+          </Link>
+          <button className="toggle-btn">
+            <GoThreeBars size={30} />
+          </button>
+        </div>
+        <ul className="nav-links">
+          <li>
+            <button>Serviços</button>
+          </li>
+          <li>
+            <button>Empresa</button>
+          </li>
+          <li>
+            <button>Suporte</button>
+          </li>
+        </ul>
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.nav`
   position: relative;
-  background: transparent;
   z-index: 1;
   height: 5rem;
   display: flex;
@@ -27,19 +50,16 @@ const Wrapper = styled.nav`
     align-items: center;
     justify-content: space-between;
     img {
-      width: auto;
+      width: 5rem;
     }
     .toggle-btn {
-      width: 3.5rem;
-      height: 2.25rem;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
-      border-radius: 2rem;
       border: transparent;
       color: var(--clr-white);
-      background: var(--clr-primary-5);
+      background: transparent;
       cursor: pointer;
       transition: var(--transition);
       &:hover {
@@ -55,7 +75,11 @@ const Wrapper = styled.nav`
       .toggle-btn {
         display: none;
       }
+      img {
+        width: 6rem;
+      }
     }
+
     .nav-center {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -76,9 +100,9 @@ const Wrapper = styled.nav`
       color: var(--clr-white);
       background: transparent;
       border: transparent;
-      font-size: 1rem;
+      font-size: 1.1rem;
       letter-spacing: 2px;
-      font-weight: 500;
+      font-weight: 400;
       padding: 10px 20px;
       width: 100%;
       text-transform: capitalize;
