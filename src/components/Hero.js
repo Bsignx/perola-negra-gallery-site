@@ -9,7 +9,7 @@ const Hero = () => {
       <Background>
         <article>
           <h3>Se você pode imaginar, nós podemos criar</h3>
-          <h1>Deixe suas ideias se materializarem através de nossos móveis planejados</h1>
+          <h1>Deixe que suas ideias se tornem reais</h1>
           <Link to="/projects">Projetos</Link>
         </article>
       </Background>

@@ -1,11 +1,41 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import Title from "./Title"
 import styled from "styled-components"
 import Image from "gatsby-image"
 import SearchButtons from "./SearchButtons"
-const Projects = () => {
-  return <h2>projects component</h2>
+const Projects = ({ projects: data, title, page }) => {
+  const [projects, setProjects] = useState(data)
+
+  return (
+    <Wrapper className="section">
+      <Title title={title || "projetos"} />
+      <div className="section-center">
+        {projects.map(item => {
+          const { id } = item
+          const { name, type } = item.data
+          const fluid = item.data.image.localFiles[0].childImageSharp.fluid
+
+          return (
+            <article key={id}>
+              <div className="container">
+                <Image fluid={fluid} className="img" />
+                <div className="info">
+                  <p>- {type} -</p>
+                  <h3>{name}</h3>
+                </div>
+              </div>
+            </article>
+          )
+        })}
+      </div>
+      {!page && (
+        <Link to="/projects" className="btn">
+          Ver todos projetos
+        </Link>
+      )}
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`
@@ -34,9 +64,9 @@ const Wrapper = styled.section`
       position: relative;
       overflow: hidden;
       border-radius: var(--radius);
-      background: var(--clr-primary-7);
+      background: var(--clr-primary-5);
       &:hover .img {
-        opacity: 0.2;
+        opacity: 0.4;
       }
       .info {
         position: absolute;
@@ -78,7 +108,7 @@ const Wrapper = styled.section`
   }
   a {
     display: block;
-    width: 9rem;
+    width: 12rem;
     text-align: center;
     margin: 0 auto;
     margin-top: 3rem;

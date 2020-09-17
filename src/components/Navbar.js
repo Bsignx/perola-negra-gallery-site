@@ -39,6 +39,7 @@ const Wrapper = styled.nav`
   height: 5rem;
   display: flex;
   align-items: center;
+
   .nav-center {
     width: 90vw;
     margin: 0 auto;
@@ -81,8 +82,9 @@ const Wrapper = styled.nav`
     }
 
     .nav-center {
-      display: grid;
-      grid-template-columns: auto 1fr;
+      display: flex;
+      margin-top: 2rem;
+      justify-content: center;
       gap: 0 2rem;
       grid-gap: 0 4rem;
       align-items: center;

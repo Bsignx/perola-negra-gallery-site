@@ -3,9 +3,23 @@ import styled from "styled-components"
 import Title from "./Title"
 import services from "../constants/services"
 const About = () => {
-  return <h2>about component</h2>
+  return (
+    <Wrapper className="section">
+      <Title title="Sobre nós" />
+      <div className="section-center">
+        {services.map(({ id, icon, label, text }) => (
+          <article key={id}>
+            <span>{icon}</span>
+            <h4>{label}</h4>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </Wrapper>
+  )
 }
 const Wrapper = styled.section`
+
   .section-center {
     margin-top: 4rem;
     display: grid;
@@ -20,10 +34,12 @@ const Wrapper = styled.section`
     h4 {
       text-transform: uppercase;
       font-weight: 500;
+      
     }
     p {
       color: var(--clr-grey-3);
       max-width: 35em;
+      font-family: var(--ff-primary);
     }
     @media (min-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
