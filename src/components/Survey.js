@@ -5,7 +5,88 @@ import base from "./Airtable"
 import { FaVoteYea } from "react-icons/fa"
 
 const Survey = () => {
-  return <h2>survey component</h2>
+  const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  const getRecords = async () => {
+    const records = await base("Survey")
+      .select({})
+      .firstPage()
+      .catch(err => console.error(err))
+
+    const newItems = records.map(record => {
+      const { id, fields } = record
+      return { id, fields }
+    })
+
+    setItems(newItems)
+    setLoading(false)
+  }
+
+  const giveVote = async id => {
+    setLoading(true)
+    const tempItems = [...items].map(item => {
+      if (item.id === id) {
+        let { id, fields } = item
+        fields = { ...fields, votes: fields.votes + 1 }
+        return { id, fields }
+      } else {
+        return item
+      }
+    })
+
+    const records = await base("Survey")
+      .update(tempItems)
+      .catch(err => console.log(err))
+
+    const newItems = records.map(record => {
+      const { id, fields } = record
+      return { id, fields }
+    })
+
+    setItems(newItems)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getRecords()
+  }, [])
+  console.log(items)
+
+  return (
+    <Wrapper className="section">
+      <div className="container">
+        <Title title="Pesquisa" />
+        <h3>O cômodo mais importante na casa?</h3>
+        {loading ? (
+          <h3>carregando...</h3>
+        ) : (
+          <ul>
+            {items.map(item => {
+              const {
+                id,
+                fields: { name, votes },
+              } = item
+              return (
+                <li key={id}>
+                  <div className="key">
+                    {name.toUpperCase().substring(0, 2)}
+                  </div>
+                  <div>
+                    <h4>{name}</h4>
+                    <p>{votes} votes</p>
+                  </div>
+                  <button onClick={() => giveVote(id)}>
+                    <FaVoteYea />
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`
