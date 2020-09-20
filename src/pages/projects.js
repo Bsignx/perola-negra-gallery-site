@@ -13,6 +13,7 @@ const ProjectsPage = ({ data }) => {
     <Wrapper>
       <Layout>
         <Projects title="Projetos" projects={projects} page />
+        <Algolia />
       </Layout>
     </Wrapper>
   )
@@ -36,7 +37,7 @@ export const query = graphql`
             localFiles {
               childImageSharp {
                 fluid {
-                  src
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

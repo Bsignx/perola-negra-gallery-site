@@ -64,5 +64,15 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: `ZYHQ4IZL2Q`,
+        apiKey: `317f9d9cf7e8876747a4b659a4bdb405`,
+        indexName: `Projects`,
+        queries: require("./src/constants/algolia"),
+        chunkSize: 10000,
+      },
+    },
   ],
 }
